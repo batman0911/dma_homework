@@ -14,7 +14,7 @@ Phương pháp chia để trị dựa trên 2 thao tác chính:
 Việc “Phân rã”: thực hiện trên miền dữ liệu (chia miền dữ liệu thành các miền
 nhỏ hơn tương đương 1 bài toán con)
 
-\subsubsection{Mô hình}
+\subsubsection{Mô hình và lược đồ}
 Xét bài toàn $P$ trên miền dữ liệu $R$.
 
 Gọi $D\_C(R)$ là thuật giải $P$ trên miền dữ liệu $R$.
@@ -25,5 +25,31 @@ Với $R_0$ là miền đủ nhỏ để  $D\_C(R)$ có lời giải, ta có lư
 
 \begin{lstlisting}[style=algo]
     Divide_Conque($R$):
-        if($R = R_0$)
+        if($R = R_0$):
+            solve Divide_Conque($R_0$)
+        else
+            divide $R$ to $R_1, R_2, ..., R_n$
+            for ($i = 1, 2, ..., n$):
+                Divide_Conque($R_i$)
+            Combine and get result
+    end
 \end{lstlisting}
+
+\subsubsection{Phân tích và đánh giá}
+Để phân tích và đánh giá độ phức tạp của thuật toán, ta thực hiện 2 công đoạn
+
+\begin{itemize}
+    \item Xây dựng công thức truy hồi đánh giá độ phức tạp thuật toán
+    \item Giải công thức truy hồi xác định độ phức tạp thuật toán.
+        \begin{itemize}
+            \item Phép thế liên tiếp
+            \item Sử dụng định lí chính
+        \end{itemize}
+\end{itemize}
+
+
+\subsubsection{Ví dụ}
+Ta xét bài toán \textit{tìm kiếm nhị phân trên một mảng được sắp xếp}.
+
+Cho dãy $n$ phần tử được sắp theo thứ tự (\textit{tăng dần}) và một giá trị $x$ 
+bất kỳ. Kiểm tra xem phần tử  $x$ có trong dãy không?
