@@ -10,3 +10,20 @@ Phương pháp chia để trị dựa trên 2 thao tác chính:
     \item Trị (\textit{conque}): giải từng bài toán con (theo cách tương tự bài toán đầu - đệ
     qui) rồi tổng hợp các lời giải để nhận kết quả của bài toán ban đầu.
 \end{itemize}
+
+Việc “Phân rã”: thực hiện trên miền dữ liệu (chia miền dữ liệu thành các miền
+nhỏ hơn tương đương 1 bài toán con)
+
+\subsubsection{Mô hình}
+Xét bài toàn $P$ trên miền dữ liệu $R$.
+
+Gọi $D\_C(R)$ là thuật giải $P$ trên miền dữ liệu $R$.
+
+Nếu $R$ có thể phân rã thành $n$ miền con: $R = R_1 \cup R_2 \cup ... \cup R_n$
+
+Với $R_0$ là miền đủ nhỏ để  $D\_C(R)$ có lời giải, ta có lược đồ giải thuật chia để trị như sau:
+
+\begin{lstlisting}[style=algo]
+    Divide_Conque($R$):
+        if($R = R_0$)
+\end{lstlisting}
