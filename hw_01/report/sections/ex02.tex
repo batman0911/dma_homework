@@ -51,5 +51,73 @@ Với $R_0$ là miền đủ nhỏ để  $D\_C(R)$ có lời giải, ta có lư
 \subsubsection{Ví dụ}
 Ta xét bài toán \textit{tìm kiếm nhị phân trên một mảng được sắp xếp}.
 
-Cho dãy $n$ phần tử được sắp theo thứ tự (\textit{tăng dần}) và một giá trị $x$ 
-bất kỳ. Kiểm tra xem phần tử  $x$ có trong dãy không?
+\begin{itemize}
+    \item Cho dãy $n$ phần tử được sắp theo thứ tự (\textit{tăng dần}) và một giá trị $x$ 
+    bất kỳ. Kiểm tra xem phần tử  $x$ có trong dãy không?
+
+    \item Phân tích ý tưởng: so sánh giá trị $x$ với phần tử giữa của dãy tìm kiếm. Dựa
+    vào giá trị này sẽ quyết định giới hạn tìm kiếm ở bước kế tiếp là nửa trước
+    hay nửa sau dãy.
+
+    \item Lược đồ của thuật toán như sau:
+
+\end{itemize}
+
+\begin{lstlisting}[style=algo]
+    BinarySearch($a, x, L, R$):
+        // Search element $x$ in array $a$ from position $L$ to $R$
+        if ($L = R$):
+            return ($x = a_L$ ? $L$ : $-1$)
+        else
+            $M = (L + R)/2$
+            if ($x = a_M$) 
+                return ($M$)
+            else
+                if ($x < a_M$)
+                    BinarySearch($a, x, L, R$)
+                else 
+                    BinarySearch($a, x, M + 1, R$)
+                endif
+            endif
+        endif
+    end
+\end{lstlisting}
+
+\textit{Tính đúng của thuật toán}
+
+Ta chứng mình bằng quy nạp như sau 
+\begin{itemize}
+    \item Cơ sở quy nạp: $n = R - L + 1 = 1$ (dãy có 1 phần tử)
+    \begin{itemize}
+        \item Câu lệnh \lstinline{return (x = a_L ? L : -1)} trả về giá trị $L$ hoặc $-1$
+    \end{itemize}
+    
+    \item Giả thiết quy nạp: Thuật toán đúng với mọi dãy có độ dài $n = R-L+1$.
+    Hay hàm \lstinline{BinarySearch(a, x, L, R)} trả về đúng kết quả tìm kiếm $x$ với mọi dãy
+    có đội dài $1 \leq n' \leq n = R - L + 1$
+
+    \item Tổng quát: Chứng minh thuật toán đúng với $n+1 = R-L+2$
+    \begin{itemize}
+        \item Đặt $M=(L+R+1)/2$, ta có $L \leq M \leq R$
+        \item Nếu $x = a_M$ thì kết quả trả về là $M$: đúng
+        \item Nếu $x < a_M$ thì kết quả là của bài toán tìm $x$ trong tập $a_L, ... , a_M$.
+        Theo giả thiết quy nạp thì \lstinline{BinarySearch(a, x, L, R)} đúng vì 
+        $1 \leq M - L + 1 = (R - L + 1)/2 + 1 \leq R - L + 1$
+        \item Tương tự với $x > a_M$
+    \end{itemize}
+\end{itemize}
+
+\textit{Độ phức tạp của thuật toán}
+
+\begin{equation*}
+    T(n) = 
+    \begin{cases}
+        1 & \text{when } n = 1 \\
+        T(n/2) + 1 & \text{when } n > 1
+    \end{cases}
+\end{equation*}
+
+Do đó $T(n) = O(\log n)$
+
+
+
