@@ -1,0 +1,118 @@
+\subsection{Quy hoạch động}
+
+\subsubsection{Ý tưởng}
+\begin{itemize}
+    \item Quy hoạch động (Dynamic programing) là phương pháp giải các bài toán bằng cách kết hợp lời giải của các bài toán con theo nguyên tắc:
+        \begin{itemize}
+            \item Giải tất cả các bài toán con (một lần)
+            \item Lưu lời giải của các bài toán vào một bảng
+            \item Phối hợp các bài toán con để nhận lời giải bài toán ban đầu
+        \end{itemize}
+    \item Cách phát biểu khác: Một bài toán giải bằng quy hoạch động được phân rã thành các bài toán con và bài toán lớn sẽ được giải quyết thông qua các bài toán con này (bằng các phép truy hồi)
+    \item Phương pháp quy hoạch động thường được dùng cho các bài toán tìm giá trị (hoặc giá trị tối ưu)
+\end{itemize}
+
+\subsubsection{Các bước giải bài toán}
+\begin{enumerate}
+    \item{Nhận dạng bài toán}
+    \item[]Các bài toán có các đặc trưng sau thì có thể giải bằng QHĐ
+        \begin{itemize}
+            \item Bài toán có thể giải bằng đệ qui và tìm lời giải tối ưu.
+            \item Bài toán có thể phân rã thành nhiều bài toán con mà sự phối hợp lời giải của các bài toán con sẽ cho ta lời giải của bài toán ban đầu.
+            \item Quá trình tìm ra lời giải của bài toán ban đầu từ các bài toán con đơn giản hơn được thực hiện qua một số hữu hạn các bước có tính truy hồi.
+        \end{itemize}
+    \item Xây dựng công thức truy hồi
+        \begin{itemize}
+            \item Đưa bài toán về 1 dạng cơ bản, và triển khai ý tưởng của dạng bài toán đó để nhanh chóng nhận ra hướng thiết lập công thức truy hồi.
+            \item Đây là bước khó nhất và cũng quan trọng nhất trong toàn bộ quá trình thiết kế thuật toán cho bài toán.
+        \end{itemize}
+    \item Xác định và xây dựng cơ sở QHĐ
+        \begin{itemize}
+            \item Dựa vào công thức truy hồi để nhận ra các bài toán cơ sở.
+            \item Dựa vào ý nghĩa của công thức truy hồi để thiết lập giá trị cho cơ sở.
+        \end{itemize}
+    \item Dựng bảng phương án
+        \begin{itemize}
+            \item Dựa vào công thức truy hồi để tính giá trị các ô trong bảng phương án.
+            \item Chú ý: bảng phương án có thể 1 chiều, 2 chiều hoặc nhiểu hơn
+        \end{itemize}
+    \item Tìm kết quả tối ưu
+        \begin{itemize}
+            \item Xác định vị trí chứa kết quả tối ưu của bài toán trên bảng phương án.
+            \item Chú ý: ngoài kết quả tối ưu, ô chứa kết quả tối ưu còn là điểm bắt đầu cho quá trình truy vết tìm nghiệm => lưu tọa độ của ô đó.
+        \end{itemize}
+    \item Truy vết liệt kê thành phần nghiệm
+        \begin{itemize}
+            \item Từ điểm bắt đầu là vị trí chứa kết quả tối ưu
+            \item Truy ngược lại về điểm bắt đầu của nghiệm: có thể là những ô đầu tiên trong bảng phương án (bài toán cơ sở), có thể là ô của bảng phương án đạt giá trị đầu.
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Ví dụ}
+\begin{enumerate}
+    \item Bài toán "Dãy con đơn điệu tăng dài nhất"
+    \begin{description}
+        \item[Bài toán:] Tìm dãy con dài nhất của một dãy đã cho. Các phần tử có thể không liên tiếp.
+        \item[Phân tích:]
+            \begin{itemize}
+                \item[]
+                \item Input: (a,n)
+                \item Output: số lớn nhất các phần tử của dãy theo thứ tự tăng dần
+                \item Hàm tối ưu L(i): Độ dài dãy con đơn điệu tăng dài nhất đến phần tử i
+                \item[]Là độ dài các dãy con dài nhất đến j cộng 1 khi ghép thêm ai vào sau, với
+                điều kiện j<i, aj<ai
+                \item Công thức truy hồi: L(i) = max{L(j)}+1 với j<i, aj<ai
+                \item Cơ sở của thuật toán: L(0) = 0; L(1) = 1
+            \end{itemize}
+            \begin{lstlisting}[style=algo]
+def lis(_list):
+    longest = [_list[0]]
+    current = [_list[0]]
+    for i in _list[1:]:
+        if i >= current[-1]:
+            current.append(i)
+        else:
+            if len(longest) < len(current):
+                longest = current
+            current = [i]
+    if len(longest) < len(current):
+            longest = current
+    return longest
+            \end{lstlisting}
+    \end{description}
+
+
+    \item Bài toán "Xếp balo 0-1"
+    \begin{description}
+        \item[Bài toán:]Có N đồ vật với trọng lượng và giá trị tương ứng(wi,vi). Tìm cách cho các vật vào balo có trọng lượng W sao cho đạt giá trị cao
+        nhất. Mỗi vật chỉ được chọn 1 lần
+        \item[Phân tích:]
+            \begin{itemize}
+                \item[]
+                \item Input: n đồ vật, (wi,vi) i=1..n, Túi có trọng lượng tối đa W
+                \item Output: V=tổng giá trị lớn nhất của các đồ vật vào balo
+                \item Hàm tối ưu dp[i,j]: Giá trị lớn nhất khi chọn đồ vật từ 1 tới i với trọng lượng balo j (i=0...n,j=0...W)
+                \item[]Nếu không chọn đồ vật thứ i thì: dp[i,j]=dp[i-1,j]
+                \item[]Nếu chọn đồ vật thứ i thì: dp[i,j]=dp[i-1,j-wi]+vi (Điều kiện wi<=j)
+                \item Công thức truy hồi: 
+                \item[]dp[i,j]=Max(dp[i-1,j], dp[i-1,j-wi]+vi)
+                \item Cơ sở quy hoạch động
+                \item[]dp[i,0]=0
+                \item[]dp[0,j]=0
+            \end{itemize}
+        
+        \begin{lstlisting}[style=algo]
+def solve(weights, values, capacity):
+    items = list(zip(weights, values))
+    def dp(i, cp):
+        if i == len(items):
+            return 0.0
+        w, v = items[i]
+        ans = dp(i + 1, cp)
+        if cp >= w:
+            ans = max(ans, dp(i + 1, cp - w) + v)
+        return ans
+    return int(dp(0, capacity))
+        \end{lstlisting}
+    \end{description}
+\end{enumerate}  
