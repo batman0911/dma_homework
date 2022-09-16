@@ -3,7 +3,7 @@ Trong bài này chúng ta sẽ xem xét bài toán dóng hàng
 toàn cục 2 chuỗi DNA sử dụng phương pháp quy hoạch động 
 với giải thuật Needleman-Wunsch.
 
-\subsection{Khái niệm}
+\subsection{Bài toán dòng hàng toàn cục}
 Có nhiều cách để phát biểu bài toán dóng hàng trình tự 
 (cho DNA, RNA hoặc 2 chuỗi kí tự). Hãy cùng điểm qua vài khái niệm.
 
@@ -42,7 +42,31 @@ là \textit{insert}, khi được thêm vào chuỗi thứ 2 thì được gọi
 Trong ví dụ trên chúng ta có 5 \textit{matches}, 6 \textit{mismatchs}, 3 \textit{inserts}
 và 2 \textit{deletes}.
 
+Chúng ta cùng xem xét mooyj ví dụ về dóng hàng toàn cục. Xét ma trận điểm cho tập 
+$\{-, A, C, G, T\}$ với $\delta(x, y) = 2, -1, -1, -1$ lần lượt cho match, mismatch, 
+delete và insert. Xét 2 chuỗi DNA $S = ACAATCC$ và $T = AGCATGC$, một cách dóng hàng
+khả dĩ như sau:
+\begin{center}
+    \lstinline{S = A-CAATCC} \\
+    \lstinline{T = AGCA-TGC}
+\end{center}
+Cách dóng hàng trên có 5 matches, 1 mismatches, 1 insert và 1 delete. Vậy điểm tương tự của 
+cách dòng hàng này là 7. Có thể kiểm tra được đây là điểm cực đại thế nên cách dóng hàng
+này là một cách tối ưu. Cần chú ý là có thể có nhiều hơn một cách dóng hàng tối ưu. 
+Ví dụ 1 cách khác cũng trả về điểm tương tự cực đại.
+\begin{center}
+    \lstinline{S = A-CAATCC} \\
+    \lstinline{T = AGC-ATGC}
+\end{center}
+
+\begin{figure}[H] % places figure environment here   
+    \centering % Centers Graphic
+    \includegraphics[width=0.3\textwidth]{./assets/score_matrix.png} 
+    \caption{Ví dụ ma trận điểm tương tự} % Creates caption underneath graph
+\end{figure}
+
 \subsection{Giải thuật Needleman-Wunsch}
+\subsubsection{Giải thuật}
 Xét 2 chuỗi kí tự $S[1...n]$ và $T[1...m]$. Để tìm các dóng hàng toàn cục tối ưu cho 
 bài toán này chúng ta có thể nghĩ tới giải thuật vét cạn bằng cách sinh ra mọi cách 
 dóng hàng và tìm xem cách nào có điểm cao nhất. Tuy nhiên cách tiếp cận này có thời
@@ -73,3 +97,33 @@ cách có điểm cực đại trong 3 trường hợp trên. Nghĩa là:
 \end{equation}
 Điểm dóng hàng tối ưu của $[1...n]$ và $T[1...m]$ là $V(n,m)$. Điểm này có thể được tính bằng
 cách điền đầy từng hàng vào bảng $V(1...n, 1...m)$ bằng các công thức truy hồi trên.
+
+\begin{figure}[H] % places figure environment here   
+    \centering % Centers Graphic
+    \includegraphics[width=0.4\textwidth]{./assets/dp.png} 
+    \caption{Bảng điểm dóng hàng 2 chuỗi $S = ACAATCC$ và $T = AGCATGC$
+    bằng giải thuật quy hoạch động Needleman-Wunsch} % Creates caption underneath graph
+    \label{fig:dp_track}
+\end{figure}
+
+Hình trên là bảng $V$ cho 2 chuỗi $S = ACAATCC$ và $T = AGCATGC$.
+Chúng ta có thể tính lần lượt giá trị của các ô trong bảng, ví dụ $V(1, 1)$ là giá trị 
+lớn nhất trong tập $\{0+2, -1-1, -1-1\}$. Sau khi điền đầy các ô ta có $V(7,7) = 7$ là 
+giá trị của ô dưới cùng bên phải hay chính là điểm của cách dóng hàng tối ưu.
+
+Để tìm ngược lại cách dóng hàng tối ưu, với mỗi ô trong bảng ta vẽ các mũi tên để biểu 
+diễn sự tương quan giữa các cặp. Ta vẽ mũi tên chéo, ngang và dọc lần lượt cho các trường
+hợp match, insert và delete. Ví dụ giá trị tại $V(1,1)$ thu được bởi $V(0,0) + 2$, chúng 
+ta vẽ 1 mũi tên chéo. Với ô $V(3,2)$, có 2 cách có giá trị điểm bằng điểm lớn nhất nên 
+ta vẽ cả 2 mũi tên chéo và dọc. Để thu được cách dóng hàng tối ưu ta cần quay lui từ ô 
+$V(7,7)$ về ô $V(0,0)$. Nếu mũi tên là chéo, 2 kí tự được dóng hàng. Với mũi tên ngang và
+dọc thì lần lượt là delete và insert. Ta thu được đường quay lui là đường mũi tên in đậm 
+trong hình \ref{fig:dp_track} theo đường $7 \to 5 \to 6 \to 4 \to 5 \to 3 \to 1 \to 0$.
+Tương ứng ta thu được cách dóng hàng tối ưu:
+
+\begin{center}
+    \lstinline{A-CAATCC} \\
+    \lstinline{AGCA-TGC}
+\end{center}
+
+\subsubsection{Thời gian tính toán}
