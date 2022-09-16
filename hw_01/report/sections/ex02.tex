@@ -122,4 +122,132 @@ Do đó $T(n) = O(\log n)$
 \textit{Source code: } \lstinline{https://github.com/batman0911/dma_homework/blob/master/hw_01/src/main.ipynb}
 
 
+\subsection{Quay lui}
 
+\subsubsection{Ý tưởng}
+Ý tưởng của phương pháp Quay lui (Back tracking): Theo nguyên tắc vét cạn (xét qua tất cả các trường hợp có thể xảy ra để tìm kết quả), nhưng chỉ xét những trường hợp “khả quan”.
+
+Tại mỗi bước, nếu có một lựa chọn được chấp thuận thì ghi nhận lại lựa chọn này và tiến hành các bước thử tiếp theo. Còn ngược lại không có lựa chọn nào thích hợp thì quay lại bước trước.
+
+Phương pháp quay lui được sử dụng để giải bài toán liệt kê các cấu hình:
+\begin{itemize}
+    \item Mỗi cấu hình được xây dựng bằng cách xác định từng phần tử
+    \item Mỗi phần tử được chọn bằng cách thử các khả năng \textit{\textbf{có thể}}
+    \item Độ dài cấu hình tùy thuộc bài toán
+        \begin{itemize}
+            \item Xác định trước: sinh dãy độ dài n
+            \item Không xác định trước: đường đi
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Mô hình}
+Không gian nghiệm của bài toán (tập khả năng) $X=\{(x_1,x_2,…,x_n)\}$ gồm các cấu hình liệt kê có dạng ($x_1,x_2,…,x_n$) cần được xây dựng:
+\begin{itemize}
+    \item Cho $x_1$ nhận lần lượt các giá trị có thể. Với mỗi giá trị thử gán cho $x_1$ thì:
+    \item Cho $x_2$ nhận lần lượt các giá trị có thể. Với mỗi giá trị thử gán cho $x_2$ thì xét khả năng chọn $x_3,…, x_n$, => cấu hình tìm được ($x_1, x_2, ……, x_n$).
+    \item \textbf{Tổng quát:} Tại mỗi bước i: Xây dựng thành phần $x_i$
+    \begin{itemize}
+        \item Xác định $x_i$ theo khả năng v.
+        \item Nếu gặp điều kiện dừng (i = n hoặc $x_i$ thỏa mãn điều kiện dừng) thì ta có được một lời giải, ngược lại thì tiến hành bước i+1 để xác định $x_{i+1}$
+        \item Nếu không có một khả năng nào chấp nhận được cho $x_i$ thì lại lùi lại bước trước để xác định lại thành phần $x_{i-1}$ – sự quay lui
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Lược đồ}
+Lược đồ phương pháp quay lui như sau:
+\begin{itemize}
+    \item [] Try(i) $\equiv \textit{//Sinh thành phần thứ i của cấu hình}$
+        \begin{itemize}
+            \item [] for (v thuộc tập khả năng thành phần nghiệm $x_i$)
+                \begin{itemize}
+                    \item [] \textbf{if} ($x_i$ chấp nhận được giá trị v)
+                        \begin{itemize}
+                            \item [] $x_i$ = v;
+                            \item [] <Ghi nhận trạng thái chấp nhận v>;
+                            \item [] \textbf{if} (gặp điều kiện dừng) \textit{//i=n hoặc $x_i$ thỏa mãn điều kiện dừng}
+                            \item [] \qquad <xử-lí-nghiệm>;
+                            \item [] $\textbf{else} \qquad \textit{//lời gọi sinh thành phần tiếp theo của cấu hình}$
+                                \item [] \qquad Try (i + 1)
+                            \item [] <Khôi phục trạng thái chưa chấp nhận v>;
+                        \end{itemize}
+                    \item [] \textbf{endif;}
+                \end{itemize}
+            \item [] \quad \textbf{endfor;}
+        \end{itemize}
+    \item [] \qquad \textbf{End.} \hfill \textbf{Lời gọi ban đầu:} Try(1)
+\end{itemize}
+
+
+\subsubsection{Phân tích và đánh giá}
+Ta thực hiện 2 công đoạn phân tích và đánh giá thuật toán như sau:
+
+\begin{itemize}
+    \item Công thức truy hồi
+        \begin{itemize}
+            \item [] $
+                    T(n) = \left\{\begin{array}{lcr}
+                    1 & \text{khi} & n \leq 1\\
+                    dT(n-1)+1 & \text{khi} & n > 1
+                    \end{array} \right.
+                   $
+            \item [] d: max (hoặc giá trị trung bình) lực lượng của tập khả năng của các thành phần nghiệm $x_i$
+        \end{itemize}
+    
+    \item Giải công thức truy hồi: $T(n) = O(d\sp{n})$
+        \begin{itemize}
+            \item Là trường hợp xấu nhất (vét cạn)
+            \item Trong triển khai thuật toán thời gian thực tế có thể giảm xuống
+            \item [] \qquad for (v thuộc tập khả năng thành phần nghiệm $x_i$)
+            \item [] \qquad \qquad if ($x_i$ chấp nhận được giá trị v)
+        \end{itemize}
+\end{itemize}
+
+\textbf{Tính đúng của thuật toán:}
+Sự hiển nhiên trong tính đúng của thuật toán quay lui:
+\begin{itemize}
+    \item Mỗi phần tử trong cấu hình nghiệm được chọn trong tập khả năng
+        \begin{itemize}
+            \item [] for (v thuộc tập khả năng thành phần nghiệm $x_i$)
+            \item [] \hspace{1cm} if ( $x_i$ chấp nhận được giá trị v)
+            \item [] \hspace{1.5cm} $x_i$ = v;
+        \end{itemize}
+        
+    \item Tính dừng của lời gọi đệ quy và cho ra kết quả đúng
+    \item [] \hspace{1.8cm} \textbf{if} (gặp điều kiện dừng) \textit{//i=n hoặc xi thỏa mãn đk dừng}
+    \item [] \hspace{2.5cm} <xử-lí-nghiệm>;
+    \item [] \hspace{1.8cm} \textbf{else} \textit{//lời gọi sinh thành phần tiếp theo của cấu hình}
+    \item [] \hspace{2.5cm} Try (i + 1)
+    
+    \item \hspace{0.5cm} Đệ quy tiến Try(1)/$x_1$ $\rightarrow$ Try(2)/$x_2$ $\rightarrow$ … $\rightarrow$ Try(m)/$x_m$ 
+        \begin{itemize}
+            \item Đủ thành phần nghiệm m=n (n - hữu hạn)
+            \item Đến thành phần thỏa mãn điều kiện tức là $x_m$ thỏa mãn điều kiện nghiệm
+        \end{itemize}
+\end{itemize}
+
+
+\subsubsection{Ví dụ}
+Ta xét bài toán \textit{Liệt kê dãy k\_ary có độ dài n}
+\begin{itemize}
+    \item Phân tích
+        \begin{itemize}
+            \item Input: n, k
+            \item Output: Các dãy X = ($x_1, x_2, …,x_n$) trong đó $x_i$ =0,1,..k-1
+            \item Dùng giải thuật Try(i) để sinh giá trị $x_i$
+            \item Nếu i=n thì in giá trị nghiệm X, ngược lại sinh tiếp $x_{i+1}$ bằng Try(i+1)
+        \end{itemize}
+    \item Lược đồ giải thuật:
+        \begin{itemize}
+            \item [] Try(i) $\equiv$
+                \begin{itemize}
+                    \item [] \textbf{for} (v=0..k-1) \textit{//v nhận giá trị từ 0 đến k-1}
+                        \begin{itemize}
+                            \item [] $x_i$ = v ;
+                            \item [] \textbf{if} (i=n) printResult (X) ;
+                            \item [] \textbf{else} Try(i+1) ;
+                        \end{itemize}
+                    \item [] \textbf{endfor};
+                \end{itemize}
+            \item [] \enskip \textbf{End.} \hfill Lời gọi ban đầu \textbf{Try(1)}
+        \end{itemize}
+\end{itemize}
