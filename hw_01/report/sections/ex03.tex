@@ -48,8 +48,8 @@ bài toán này chúng ta có thể nghĩ tới giải thuật vét cạn bằng
 dóng hàng và tìm xem cách nào có điểm cao nhất. Tuy nhiên cách tiếp cận này có thời
 gian tính toán theo hàm mũ. Trong phần này, chúng ta sẽ xem xét một giải thuật hiệu quả
 áp dụng \textit{quy hoạch đông} có tên là \textit{Needleman-Wunsch}. \\
-Chúng ta thiết kế một hàm đệ quy $V(i,j)$ với 2 trường hợp: (1) $i = 0$ hoặc $j = 0$
-và (2) cả $i > 0$ và $j > 0$. \\
+Chúng ta thiết kế một hàm đệ quy (công thức truy hồi) $V(i,j)$ với 2 trường hợp: (1) $i = 0$ 
+hoặc $j = 0$ và (2) cả $i > 0$ và $j > 0$. \\
 Với trường hợp (1) khi $i = 0$ hoặc $j = 0$ chúng ta dóng hàng chuỗi bằng 1 chuỗi rỗng.
 Hay nói cách khác là ta chỉ cần thêm hoặc xóa kí tự. Chúng ta có các phương trình:
 \begin{equation}
@@ -59,4 +59,17 @@ Hay nói cách khác là ta chỉ cần thêm hoặc xóa kí tự. Chúng ta c�
         V(i, 0) &= V(i -1, 0) + \delta(S[i], -) && \text{xóa i lần} 
     \end{aligned}
 \end{equation}
-
+Với trường hợp (2) khi cả $i > 0$ và $j > 0$, ta thấy rằng với một cách dóng hàng nào đó
+của chuỗi $S[1...i]$ và $T[1...j]$ cặp kí tự cuối cùng phải thuộc 1 trong 3 loại 
+match/mismatch (cả 2 đều là kí tự), insert hoặc delete. Để thu được điểm tối ưu ta chọn 
+cách có điểm cực đại trong 3 trường hợp trên. Nghĩa là:
+\begin{equation}
+    V(i, j) = \max 
+    \begin{cases}
+        V(i - 1, j - 1) + \delta(S[i], T[j]) & \text{match/mismatch} \\
+        V(i - 1, j) + \delta(S[i], -) & \text{delete} \\
+        V(i, j - 1) + \delta(-, T[j]) & \text{insert} \\
+    \end{cases}
+\end{equation}
+Điểm dóng hàng tối ưu của $[1...n]$ và $T[1...m]$ là $V(n,m)$. Điểm này có thể được tính bằng
+cách điền đầy từng hàng vào bảng $V(1...n, 1...m)$ bằng các công thức truy hồi trên.
