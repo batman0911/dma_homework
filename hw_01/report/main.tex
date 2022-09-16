@@ -191,55 +191,6 @@ Tháng 8 năm 2022  \\
 
 
 
-This homework answers the problem set sequentially. 
-
-\begin{enumerate}
-
-\item {\it Download the US Presidential Elections data set {\tt uspresidentialelections.dta} from the course ILIAS site. Load the data set in {\tt R}}. % <--- For future Homework sets you of course have to change the questions.
-
-\begin{verbatim}
-Copy your R Code to answer the question here.
-\end{verbatim}
-
-\item {\it Describe the dataset. What variables does it contain? How many observations are there? What time span does it cover?}
-
-Please type your answer here.
-
-\begin{verbatim}
-Put the right R command here.
-\end{verbatim}
-
-\newpage % The \newpage command starts a new blank page. 
-\item {\it Compute measures of central tendency and variability of the variables {\tt vote} and {\tt growth} using {\tt R}. Use the numerical measures of central tendency and variability discussed in class. Describe them in your own words and make a nice table. Plot the distribution of both variables using a boxplot and histogram. Make sure to make your plots as nice-looking as possible. Especially, include a title and label the axes.}
-
-Your answer goes here
-
-\begin{verbatim}
-3 R commands here
-\end{verbatim}
-
-Potentially, your answer continues here.
-
-\begin{verbatim}
-4 R commands here
-\end{verbatim}
-
-And more of your answer here.
-
-\begin{verbatim}
-And more space for your R commands.
-\end{verbatim}
-
-\begin{verbatim}
-# This is the code to produce the first boxplot.
-pdf(file = "box1.pdf")
-boxplot(us_data$vote, horizontal = T,
-        main  = "A Boxplot of the Variable Vote",
-        names = "Vote",
-        xlab  = "Range of Votes")
-dev.off()
-\end{verbatim}
-
 % Now we also want to include the graph in our write up.
  \begin{figure}[H] % places figure environment here   
     \centering % Centers Graphic
@@ -261,27 +212,5 @@ Growth                                & x                                 & x   
 \label{my-label}
 \end{table}
 % You just have to exchange the x for the right value.
-
-\newpage
-\item {\it Make a bar plot of the party affiliation of incumbent presidential candidates.}
-
-Include the code for the bar plot and the plot here. % Don't forget to use the verbatim environment for the code.
-
-\newpage
-\item  {\it During the presidential campaign in 1992, Bill Clinton's campaign coined the phrase ``It's the economy, stupid!" Let's investigate the relationship between the economy and electoral success. Generate a nice-looking scatterplot of economic growth and vote share. Label the data points with the year of the election. Describe the pattern that you see in your own words.}
-
-Include the code for the scatterplot as well as the plot here.
-
-Then, describe the pattern you see. In the scatterplot we can see that... 
-
-\end{enumerate}
-
-\clearpage
-\section*{R-Code}
-
-\begin{verbatim}
-Finally, copy and paste the entire script here.
-
-\end{verbatim}
 
 \end{document}

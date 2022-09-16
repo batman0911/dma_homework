@@ -1,3 +1,62 @@
 \section{Bài 3}
 Trong bài này chúng ta sẽ xem xét bài toán dóng hàng
-toàn cục 2 chuỗi DNA sử dụng phương pháp quy hoạch động
+toàn cục 2 chuỗi DNA sử dụng phương pháp quy hoạch động 
+với giải thuật Needleman-Wunsch.
+
+\subsection{Khái niệm}
+Có nhiều cách để phát biểu bài toán dóng hàng trình tự 
+(cho DNA, RNA hoặc 2 chuỗi kí tự). Hãy cùng điểm qua vài khái niệm.
+
+\begin{itemize}
+    \item Dóng hàng trình tự: là một cách sắp xếp trình tự của DNA,
+    RNA hoặc protein để xác định các vùng giống nhau có thể là
+    hệ quả của mối quan hệ chức năng, cấu trúc hoặc tiến hóa giữa
+    các trình tự.
+    \item Một cách dóng hàng của 2 chuỗi được thiết lập bằng cách thêm
+    các khoảng trống (dấu cách) vào các vị trí bất kì trên 2 chuỗi này
+    để chúng có cùng độ dài và không có 2 khoảng trống nào có cùng vị trí 
+    trên 2 chuỗi
+    \item Chuỗi con chung dài nhất (longest common subsequence, LCS):
+    là chuỗi trình tự chứa nhiều kí tự giống nhau nhất của hai hay
+    nhiều chuỗi.
+\end{itemize}
+Ví dụ một cách dóng hàng với 2 chuỗi S (\lstinline{interestingly}) 
+và T (\lstinline{bioinformatics}) như sau
+\begin{center}
+    \lstinline{-i--nterestingly} \\
+    \lstinline{bioinformatics--}
+\end{center}
+
+Một cách tổng quát, chúng ta có thể chấm điểm cho mỗi cặp kí tự được dóng hàng.
+Gọi $\Sigma$ là tập các kí tự và "-" là kí tự đặc biệt kí hiệu cho dấu cách. 
+Sự tương tự của các cặp kí tự trong 2 chuỗi có thể được biểu diễn thông qua 
+một ma trận $\delta$ mà $\delta(x,y)$ là điểm của cặp $x$ và $y$ với 
+$x, y \in \Sigma \cup \{-\}$. \\
+Bài toán dóng hàng toàn cục có thể mô hình hóa bằng cách tìm một các dóng hàng A
+nào đó để cực đại $\sum_{\{x, y \} \in A} \delta(x,y)$. Cách dóng hàng này được
+gọi là cách tối ưu (\textit{optimal alignment}). \\
+Khi một cặp kí tự được sắp xếp và giống nhau, liên hệ giữa chúng
+ được gọi là \textit{match}, ngược
+lại gọi là \textit{mismatch}. Khi dấu cách được thêm vào chuỗi thứ nhất mối liên hệ 
+là \textit{insert}, khi được thêm vào chuỗi thứ 2 thì được gọi là \textit{delete}. \\
+Trong ví dụ trên chúng ta có 5 \textit{matches}, 6 \textit{mismatchs}, 3 \textit{inserts}
+và 2 \textit{deletes}.
+
+\subsection{Giải thuật Needleman-Wunsch}
+Xét 2 chuỗi kí tự $S[1...n]$ và $T[1...m]$. Để tìm các dóng hàng toàn cục tối ưu cho 
+bài toán này chúng ta có thể nghĩ tới giải thuật vét cạn bằng cách sinh ra mọi cách 
+dóng hàng và tìm xem cách nào có điểm cao nhất. Tuy nhiên cách tiếp cận này có thời
+gian tính toán theo hàm mũ. Trong phần này, chúng ta sẽ xem xét một giải thuật hiệu quả
+áp dụng \textit{quy hoạch đông} có tên là \textit{Needleman-Wunsch}. \\
+Chúng ta thiết kế một hàm đệ quy $V(i,j)$ với 2 trường hợp: (1) $i = 0$ hoặc $j = 0$
+và (2) cả $i > 0$ và $j > 0$. \\
+Với trường hợp (1) khi $i = 0$ hoặc $j = 0$ chúng ta dóng hàng chuỗi bằng 1 chuỗi rỗng.
+Hay nói cách khác là ta chỉ cần thêm hoặc xóa kí tự. Chúng ta có các phương trình:
+\begin{equation}
+    \begin{aligned}
+        V(0, 0) &= 0 & \\
+        V(0, j) &= V(0, j - 1) + \delta(-, T[j]) && \text{thêm j lần} \\
+        V(i, 0) &= V(i -1, 0) + \delta(S[i], -) && \text{xóa i lần} 
+    \end{aligned}
+\end{equation}
+
