@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.9.15)  16 SEP 2022 01:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.9.15)  23 SEP 2022 08:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -687,7 +687,7 @@ LaTeX Warning: Command \textellipsis invalid in math mode on input line 147.
 
 [4]
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 235.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 236.
 
 [5]) (sections/ex03.tex) [6]
 <box1.pdf, id=40, 505.89pt x 505.89pt>
@@ -701,7 +701,7 @@ Package pdftex.def Info: box1.pdf  used on input line 246.
 Here is how much of TeX's memory you used:
  16533 strings out of 478338
  313007 string characters out of 2851208
- 735128 words of memory out of 3000000
+ 735129 words of memory out of 3000000
  34630 multiletter control sequences out of 15000+600000
  490856 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
