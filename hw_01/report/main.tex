@@ -108,6 +108,18 @@
 
 \usepackage{amsmath}
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\urlstyle{same}
+
 % Import custom code block
 \input{config/code_block.tex}
 
@@ -191,26 +203,26 @@ Tháng 8 năm 2022  \\
 
 
 
-% Now we also want to include the graph in our write up.
- \begin{figure}[H] % places figure environment here   
-    \centering % Centers Graphic
-    \includegraphics[width=0.9\textwidth]{box1.pdf} 
-    \caption{Boxplot of Incumbent Vote share} % Creates caption underneath graph
-  \end{figure}
+% % Now we also want to include the graph in our write up.
+%  \begin{figure}[H] % places figure environment here   
+%     \centering % Centers Graphic
+%     \includegraphics[width=0.9\textwidth]{box1.pdf} 
+%     \caption{Boxplot of Incumbent Vote share} % Creates caption underneath graph
+%   \end{figure}
 
 
-% Now all we need to answer the question is a neat table. The easiest way to get a nice looking table is to browse to http://www.tablesgenerator.com. Generate your table just like in Word or any other WYSIWYG editor. Then copy and include the code here. I already did that for you.
+% % Now all we need to answer the question is a neat table. The easiest way to get a nice looking table is to browse to http://www.tablesgenerator.com. Generate your table just like in Word or any other WYSIWYG editor. Then copy and include the code here. I already did that for you.
 
-\begin{table}[H]
-\centering
-\begin{tabular}{llllllll}
-\multicolumn{1}{c}{\textbf{Variable}} & \multicolumn{1}{c}{\textit{Mean}} & \multicolumn{1}{c}{\textit{Median}} & \textit{Mode} & \textit{Var} & \textit{SD} & \textit{Range} & \textit{IQR} \\ \hline
-Vote                                  & x                                 & x                                   & x             & x            & x           & x              & x            \\
-Growth                                & x                                 & x                                   & x             & x            & x           & x              & x           
-\end{tabular}
-\caption{Measures of central tendency and variability.}
-\label{my-label}
-\end{table}
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{llllllll}
+% \multicolumn{1}{c}{\textbf{Variable}} & \multicolumn{1}{c}{\textit{Mean}} & \multicolumn{1}{c}{\textit{Median}} & \textit{Mode} & \textit{Var} & \textit{SD} & \textit{Range} & \textit{IQR} \\ \hline
+% Vote                                  & x                                 & x                                   & x             & x            & x           & x              & x            \\
+% Growth                                & x                                 & x                                   & x             & x            & x           & x              & x           
+% \end{tabular}
+% \caption{Measures of central tendency and variability.}
+% \label{my-label}
+% \end{table}
 % You just have to exchange the x for the right value.
 
 \end{document}

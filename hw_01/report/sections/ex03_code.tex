@@ -1,5 +1,94 @@
 \subsection{Triển khai thuật toán}
-\subsubsection{Mã giả}
 Trong phần này chúng ta sẽ đưa ra mã giả cài đặt thuật toán Needleman-Wunsch để lập bảng điểm
 dóng hàng và trình bày cách quay lui để đưa ra kết quả dóng hàng 2 chuỗi DNA. \\
-Trước hết để cho gọn ta kí hiệu $V(i, j) = s_{i,j}$
+Thay vì gọi là \textit{bảng} như phần trước, chung ta sẽ xây dựng một 
+\textit{ma trận} $V$ gọi là ma trận \textit{score}.
+Ở đây ta kí hiệu $v[i, j]$ là thành phần $v_{i,j}$ của ma trận $V$,
+$s[i]$ là kí tự tại chỉ số $i$ của chuỗi $s$ (lưu ý chỉ số đánh từ $0$). \\
+Trước hết là mã giả để  xây dựng ma trận $V$ hay nói cách khác là điền đầy 
+bảng điểm dóng hàng của 2 chuỗi $s$ và $t$.
+
+\begin{lstlisting}[style=algo]
+    // alias for backtracking arrows
+    left, up, dia = 1, 2, 3 
+
+    // define score for characters status
+    match, mismatch, insert, delete = 2, -1, -1, -1
+
+    delta(a, b):
+        // define score
+        if a == b:
+            return match
+        if '-' == a:
+            return insert
+        if '-' == b:
+            return delete
+        return mismatch
+    end
+
+    node_score(s, t, node, i, j):
+        // calculate score of node[i, j]
+        score_match_mismatch = node[i-1, j-1] \
+            + delta(s[i], t[j])
+        score_delete = node[i-1, j] + delta(s[i], '-')
+        score_insert = node[i, j-1] + delta(s[i], '-')
+        return max([score_match_mismatch, 
+                    score_delete, 
+                    score_insert])
+    end
+
+
+    lsc(s, t):
+        // fill the score table
+        n = length of s
+        m = length of t
+        backtrack = zero matrix with size $(n+1) \times (m+1)$
+        v = zero matrix with size $(n+1) \times (m+1)$
+        s = '-' + s
+        t = '-' + t
+
+        for i from 0 to n:
+            v[i, 0] = -i
+
+        for j from 0 to m:
+            v[0, j] = -j
+
+        for i from 1 to n:
+            for j from 0 to m:
+                v[i, j] = node_score(s, t, v, i, j)
+                if v[i, j] == v[i-1, j] + delta(s[i], '-'):
+                    backtrack[i, j] = up
+                elif v[i, j] == v[i, j-1] + delta('-', t[j]):
+                    backtrack[i, j] = left
+                else:
+                    backtrack[i, j] = dia
+
+        return v, backtrack
+    end
+\end{lstlisting}
+
+Tiếp theo ta có mã giả cho quá trình quay lui để đưa ra kết quả dòng hàng
+\begin{lstlisting}[style=algo]
+    output(s, t, backtrack):
+        // return 2 aligned sequences
+        n = length of s
+        m = length of t
+        source, target = s, t
+        i, j = n, m
+        while i > 0 and j > 0:
+            if backtrack[i, j] == left:
+                inserting '-' to source at index $(j-1)$
+                j = j - 1
+                continue
+            if backtrack[i, j] == up:
+                inserting '-' to target at index $(i-1)$
+                i = i - 1
+                continue
+            i = i - 1
+            j = j - 1
+        return source, target
+    end
+\end{lstlisting}
+
+Cuối cùng là \href{https://github.com/batman0911/dma_homework/blob/master/hw_01/src/sequence.ipynb}{python code} 
+cài đặt thuật toán.

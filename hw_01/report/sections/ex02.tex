@@ -66,11 +66,11 @@ Ta xét bài toán \textit{tìm kiếm nhị phân trên một mảng được s
 \begin{lstlisting}[style=algo]
     BinarySearch($a, x, L, R$):
         // Search element $x$ in array $a$ from position $L$ to $R$
-        if ($L = R$):
-            return ($x = a_L$ ? $L$ : $-1$)
+        if ($L == R$):
+            return ($x == a_L$ ? $L$ : $-1$)
         else
             $M = (L + R)/2$
-            if ($x = a_M$) 
+            if ($x == a_M$) 
                 return ($M$)
             else
                 if ($x < a_M$)
