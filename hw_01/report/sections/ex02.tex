@@ -158,32 +158,31 @@ Không gian nghiệm của bài toán (tập khả năng) $X=\{(x_1,x_2,…,x_n)
 \subsubsection{Lược đồ}
 Lược đồ phương pháp quay lui như sau:
 
-\definecolor{mygrey}{gray}{0.95}
-\colorbox{mygrey}{
-\begin{minipage}{16cm}
-\begin{itemize}
-    \item [] Try(i) $\equiv \textit{//Sinh thành phần thứ i của cấu hình}$
-        \begin{itemize}
-            \item [] for (v thuộc tập khả năng thành phần nghiệm $x_i$)
-                \begin{itemize}
-                    \item [] \textbf{if} ($x_i$ chấp nhận được giá trị v)
-                        \begin{itemize}
-                            \item [] $x_i$ = v;
-                            \item [] <Ghi nhận trạng thái chấp nhận v>;
-                            \item [] \textbf{if} (gặp điều kiện dừng) \textit{//i=n hoặc $x_i$ thỏa mãn điều kiện dừng}
-                            \item [] \qquad <xử-lí-nghiệm>;
-                            \item [] $\textbf{else} \qquad \textit{//lời gọi sinh thành phần tiếp theo của cấu hình}$
-                                \item [] \qquad Try (i + 1)
-                            \item [] <Khôi phục trạng thái chưa chấp nhận v>;
-                        \end{itemize}
-                    \item [] \textbf{endif;}
-                \end{itemize}
-            \item [] \quad \textbf{endfor;}
-        \end{itemize}
-    \item [] \qquad \textbf{End.} \hfill \textbf{Lời gọi ban đầu:} Try(1)
-\end{itemize}
-
-\end{minipage}}
+\definecolor{mygrey}{rgb}{0.95, 0.95, 0.92}
+\colorbox{mygrey}{\parbox{16cm}{
+    \begin{itemize}
+        \item [] Try(i) $\equiv \textit{//Sinh thành phần thứ i của cấu hình}$
+            \begin{itemize}
+                \item [] for (v thuộc tập khả năng thành phần nghiệm $x_i$)
+                    \begin{itemize}
+                        \item [] \textbf{if} ($x_i$ chấp nhận được giá trị v)
+                            \begin{itemize}
+                                \item [] $x_i$ = v;
+                                \item [] <Ghi nhận trạng thái chấp nhận v>;
+                                \item [] \textbf{if} (gặp điều kiện dừng) \textit{//i=n hoặc $x_i$ thỏa mãn điều kiện dừng}
+                                \item [] \qquad <xử-lí-nghiệm>;
+                                \item [] $\textbf{else} \qquad \textit{//lời gọi sinh thành phần tiếp theo của cấu hình}$
+                                    \item [] \qquad Try (i + 1)
+                                \item [] <Khôi phục trạng thái chưa chấp nhận v>;
+                            \end{itemize}
+                        \item [] \textbf{endif;}
+                    \end{itemize}
+                \item [] \quad \textbf{endfor;}
+            \end{itemize}
+        \item [] \qquad \textbf{End.} \hfill \textbf{Lời gọi ban đầu:} Try(1)
+    \end{itemize}
+    }
+}
 
 \subsubsection{Phân tích và đánh giá}
 Ta thực hiện 2 công đoạn phân tích và đánh giá thuật toán như sau:
@@ -244,19 +243,26 @@ Ta xét bài toán \textit{Liệt kê dãy k\_ary có độ dài n}
             \item Nếu i=n thì in giá trị nghiệm X, ngược lại sinh tiếp $x_{i+1}$ bằng Try(i+1)
         \end{itemize}
     \item Lược đồ giải thuật:
-        \begin{itemize}
-            \item [] Try(i) $\equiv$
-                \begin{itemize}
-                    \item [] \textbf{for} (v=0..k-1) \textit{//v nhận giá trị từ 0 đến k-1}
-                        \begin{itemize}
-                            \item [] $x_i$ = v ;
-                            \item [] \textbf{if} (i=n) printResult (X) ;
-                            \item [] \textbf{else} Try(i+1) ;
-                        \end{itemize}
-                    \item [] \textbf{endfor};
-                \end{itemize}
-            \item [] \enskip \textbf{End.} \hfill Lời gọi ban đầu \textbf{Try(1)}
-        \end{itemize}
+    
+    \colorbox{mygrey}{\parbox{14.5cm}{
+        \begin{minipage}{14.5cm}
+            \begin{itemize}
+                \item [] Try(i) $\equiv$
+                    \begin{itemize}
+                        \item [] \textbf{for} (v=0..k-1) \textit{//v nhận giá trị từ 0 đến k-1}
+                            \begin{itemize}
+                                \item [] $x_i$ = v ;
+                                \item [] \textbf{if} (i=n) printResult (X) ;
+                                \item [] \textbf{else} Try(i+1) ;
+                            \end{itemize}
+                        \item [] \textbf{endfor};
+                    \end{itemize}
+                \item [] \enskip \textbf{End.} 
+                Lời gọi ban đầu \textbf{Try(1)}
+            \end{itemize}
+        \end{minipage}
+        }
+    }
 \end{itemize}
 
 \href{https://github.com/batman0911/dma_homework/blob/thuyth/hw_01/src/main.ipynb}{python code}
@@ -313,6 +319,7 @@ cho bài toán
 \end{enumerate}
 
 \subsubsection{Ví dụ}
+
 \begin{enumerate}
     \item Bài toán "Dãy con đơn điệu tăng dài nhất"
     \begin{description}
@@ -328,21 +335,36 @@ cho bài toán
                 \item Công thức truy hồi: L(i) = max{L(j)}+1 với j<i, aj<ai
                 \item Cơ sở của thuật toán: L(0) = 0; L(1) = 1
             \end{itemize}
-            \begin{lstlisting}[style=algo]
-def lis(_list):
-    longest = [_list[0]]
-    current = [_list[0]]
-    for i in _list[1:]:
-        if i >= current[-1]:
-            current.append(i)
-        else:
-            if len(longest) < len(current):
-                longest = current
-            current = [i]
-    if len(longest) < len(current):
-            longest = current
-    return longest
-            \end{lstlisting}
+        
+        \item[Lược đồ giải thuật:] 
+        \item[] 
+        \colorbox{mygrey}{\parbox{14.5cm}{
+                    \begin{itemize}
+                        \item[] longest,current=list[0] \\
+                        \textit{//Khởi tạo 2 danh sách longest \\ và current bằng phần tử đầu tiên trong danh sách}
+                        \item [] Try(list) $\equiv$
+                            \begin{itemize}
+                                \item [] \textbf{for} (i=list[1]...list[n-1])
+                                \item []
+                                    \begin{itemize}
+                                        \item[] \textbf{if} i>=current[n-1]: current.append(i) 
+                                        \item[]\textit{//Nếu i > giá trị cuối cùng trong current. \\
+                                            Thêm i vào cuối của current}
+                                        \item[] \textbf{else}
+                                        \item[] 
+                                        \begin{itemize}
+                                            \item [] \textbf{if} len(longest)<len(current): longest = current
+                                            \item [] current =[i]
+                                        \end{itemize}
+                                        \item [] \textbf{if} len(longest)<len(current): longest = current
+                                    \end{itemize}
+                                    \item [] \textbf{endfor}
+                            \end{itemize}
+                            
+                        \item [] printResult(longest)
+                    \end{itemize}
+                    }
+                }
     \end{description}
 
 
@@ -364,19 +386,24 @@ def lis(_list):
                 \item[]dp[i,0]=0
                 \item[]dp[0,j]=0
             \end{itemize}
-        
-        \begin{lstlisting}[style=algo]
-def solve(weights, values, capacity):
-    items = list(zip(weights, values))
-    def dp(i, cp):
-        if i == len(items):
-            return 0.0
-        w, v = items[i]
-        ans = dp(i + 1, cp)
-        if cp >= w:
-            ans = max(ans, dp(i + 1, cp - w) + v)
-        return ans
-    return int(dp(0, capacity))
-        \end{lstlisting}
+            \item[Lược đồ giải thuật:]
+            \item[] 
+            \colorbox{mygrey}{\parbox{14.5cm}{
+                \begin{itemize}
+                    \item [] items \textit{//Mảng 2 chiều gồm trọng lượng, giá trị của các đồ vật trong balo}
+                    \item [] Try(i,cp) $\equiv$
+                        \begin{itemize}
+                            \item [] \textbf{if} i = len(items) printResult(0)
+                            \item []w, v = items[i] \textit{//trọng lượng, giá trị của đồ vật thứ i}
+                            \item []ans = Try(i + 1, cp)
+                            \item []\textbf{if} cp >= w: ans = max(ans, Try(i + 1, cp - w) + v)
+                            \item []printResult(ans)
+                        \end{itemize}
+                    \item [] printResult(Try(0, cp))
+                \end{itemize}
+                }
+            }
     \end{description}
+    \href{https://github.com/batman0911/dma_homework/blob/master/hw_01/src/dynamic_programming.ipynb}{python code} 
+    cho bài toán
 \end{enumerate}  
