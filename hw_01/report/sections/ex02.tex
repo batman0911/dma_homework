@@ -320,21 +320,31 @@ Ta xét bài toán \textit{Liệt kê dãy k\_ary có độ dài n}
                 \item Công thức truy hồi: L(i) = max{L(j)}+1 với j<i, aj<ai
                 \item Cơ sở của thuật toán: L(0) = 0; L(1) = 1
             \end{itemize}
-            \begin{lstlisting}[style=algo]
-def lis(_list):
-    longest = [_list[0]]
-    current = [_list[0]]
-    for i in _list[1:]:
-        if i >= current[-1]:
-            current.append(i)
-        else:
-            if len(longest) < len(current):
-                longest = current
-            current = [i]
-    if len(longest) < len(current):
-            longest = current
-    return longest
-            \end{lstlisting}
+        
+        \item[Lược đồ giải thuật:] 
+        \item[] 
+        \begin{itemize}
+            \item [] longest,current=list[0] \textit{//Khởi tạo 2 danh sách longest và current bằng phần tử đầu tiên trong danh sách}
+            \item [] Try(list) $\equiv$
+                \begin{itemize}
+                    \item [] \textbf{for} (i=list[1]...list[n-1])
+                    \item []
+                        \begin{itemize}
+                            \item[] \textbf{if} i>=current[n-1]: current.append(i) 
+                            \item[]\textit{//Nếu i > giá trị cuối cùng trong current. Thêm i vào cuối của current}
+                            \item[] \textbf{else}
+                            \item[] 
+                            \begin{itemize}
+                                \item [] \textbf{if} len(longest)<len(current): longest = current
+                                \item [] current =[i]
+                            \end{itemize}
+                            \item [] \textbf{if} len(longest)<len(current): longest = current
+                        \end{itemize}
+                        \item [] \textbf{endfor}
+                \end{itemize}
+                
+            \item [] printResult(longest)
+        \end{itemize}
     \end{description}
 
 
@@ -356,19 +366,19 @@ def lis(_list):
                 \item[]dp[i,0]=0
                 \item[]dp[0,j]=0
             \end{itemize}
-        
-        \begin{lstlisting}[style=algo]
-def solve(weights, values, capacity):
-    items = list(zip(weights, values))
-    def dp(i, cp):
-        if i == len(items):
-            return 0.0
-        w, v = items[i]
-        ans = dp(i + 1, cp)
-        if cp >= w:
-            ans = max(ans, dp(i + 1, cp - w) + v)
-        return ans
-    return int(dp(0, capacity))
-        \end{lstlisting}
+            \item[Lược đồ giải thuật:]
+            \item[] 
+            \begin{itemize}
+                \item [] items \textit{//Mảng 2 chiều gồm trọng lượng, giá trị của các đồ vật trong balo}
+                \item [] Try(i,cp) $\equiv$
+                    \begin{itemize}
+                        \item [] \textbf{if} i = len(items) printResult(0)
+                        \item []w, v = items[i] \textit{//trọng lượng, giá trị của đồ vật thứ i}
+                        \item []ans = Try(i + 1, cp)
+                        \item []\textbf{if} cp >= w: ans = max(ans, Try(i + 1, cp - w) + v)
+                        \item []printResult(ans)
+                    \end{itemize}
+                \item [] printResult(Try(0, cp))
+            \end{itemize}
     \end{description}
 \end{enumerate}  
