@@ -1,0 +1,23 @@
+\section{Bài 2}
+Trong phần này chúng ta sẽ xem xét bài toán "Travelling salesman problem" (bài toán 
+người giao hàng) - là một trong những bài toán kinh điển và nổi tiếng trong lớp các
+bài toán về đồ thị nói chung và bài toán tìm đường đi ngắn nhất nói riêng. \\
+
+\textit{Bài toán: Cho một danh sách các thành phố và khoảng cách từng cặp một, 
+tìm đường đi ngắn nhất đi qua mỗi thành phố đúng một lần và quay về điểm xuất phát} \\
+
+
+Chúng ta có thể mô hình bài toán trên bằng đồ thị như sau: \textit{Cho một đơn đồ thị đầy đủ, 
+với các cạnh có trọng số, tìm đường đi xuất phát từ một đỉnh đi qua tất cả các đỉnh 
+của đồ thị mỗi đỉnh đúng một lần với tổng trọng số (chi phí) nhỏ nhất.}
+
+Trước hết chúng ta giải bài toán con đơn giản hơn là tìm đường đi với chi phí nhỏ nhất từ
+một đỉnh $a$ tới đỉnh $z$ cho trước. Trong bài toán này, không nhất thiết ta phải đi qua 
+tất cả các đỉnh của đồ thị. Có nhiều cách tiếp cận bài toán, cách đầu tiên mà ta có thể nghĩ 
+ngay tới là \textit{vét cạn (brute force)}, tuy nhiên việc liệt kê toàn bộ cấu hình \
+(toàn bộ các đường đi khả dĩ từ $a$ đến $z$) của bài toán rất tốn thời gian. Sau đây ta cùng
+xem xét một thuật toán hiệu quả hơn là thuật toán Dijkstra.
+
+\subsection{Thuật toán Dijkstra tìm đường đi ngắn nhất trên đồ thị}
+
+
