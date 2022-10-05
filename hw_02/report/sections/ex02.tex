@@ -19,5 +19,26 @@ ngay tới là \textit{vét cạn (brute force)}, tuy nhiên việc liệt kê t
 xem xét một thuật toán hiệu quả hơn là thuật toán Dijkstra.
 
 \subsection{Thuật toán Dijkstra tìm đường đi ngắn nhất trên đồ thị}
+Trước khi giải bài toán tổng quát, ta hãy xem xét một ví dụ đơn giản sau đây:
 
+\begin{figure}[H] % places figure environment here   
+    \centering % Centers Graphic
+    \includegraphics[width=0.4\textwidth]{assets/gr_01.png} 
+    \caption{Ví dụ đơn đồ thị với trọng số } % Creates caption underneath graph
+    \label{fig:gr_01}
+\end{figure}
 
+Tìm đường đi ngắn nhất từ đỉnh $a$ đến đỉnh $z$ trong đồ thị ở hình \ref{fig:gr_01}.\\
+Trước hết, bắt đầu từ đỉnh $a$, có 2 đỉnh kết nối với $a$ là $b$ và $d$ với trọng số 
+lần lượt là $4$ và $2$, đương nhiên $d$ là đỉnh gần $a$ nhất. Chúng ta có thể tìm đỉnh 
+gần nhất thứ 2 bằng cách liệt kê tất cả các đường đi với $d$ là đỉnh bắt đầu và đỉnh 
+kết thúc không nằm trong tập $\{a, d\}$. Tính từ đỉnh $d$, chỉ có một đường khả dĩ là $e$.
+Từ đó ta có tập $\{a, d, e\}$. Tương tự như vậy ta tìm đỉnh tiếp theo với cạnh có trọng số 
+nhỏ nhất với $e$ là đỉnh bắt đầu và đỉnh kết thúc không thuộc tập $\{a, d, e\}$, ta được 
+đỉnh $z$. Đường đi cuối cùng là $a \to d \to e \to z$.
+
+Ví dụ trên thể hiện nguyên lý tổng quát của thuật toán Dijkstra đó là đường đi từ đỉnh $a$
+tói đỉnh $z$ có thể được xây dựng bằng cách liệt kê các đường đi và tìm đường có trọng số 
+nhỏ nhất để thêm đỉnh đó vào tập đường đi.
+
+Một cách tổng quát ta có thể trình bày thuật toán Dijkstra với lược đồ sau:
