@@ -1,3 +1,5 @@
+\definecolor{mygrey}{rgb}{0.95, 0.95, 0.92}
+
 \section{Bài 2}
 Trong phần này chúng ta sẽ xem xét bài toán "Travelling salesman problem" (bài toán 
 người giao hàng) - là một trong những bài toán kinh điển và nổi tiếng trong lớp các
@@ -28,17 +30,38 @@ Trước khi giải bài toán tổng quát, ta hãy xem xét một ví dụ đ�
     \label{fig:gr_01}
 \end{figure}
 
-Tìm đường đi ngắn nhất từ đỉnh $a$ đến đỉnh $z$ trong đồ thị ở hình \ref{fig:gr_01}.\\
+Tìm đường đi ngắn nhất từ đỉnh $a$ đến đỉnh $z$ trong đồ thị ở hình \ref{fig:gr_01}.\\ 
+
 Trước hết, bắt đầu từ đỉnh $a$, có 2 đỉnh kết nối với $a$ là $b$ và $d$ với trọng số 
 lần lượt là $4$ và $2$, đương nhiên $d$ là đỉnh gần $a$ nhất. Chúng ta có thể tìm đỉnh 
 gần nhất thứ 2 bằng cách liệt kê tất cả các đường đi với $d$ là đỉnh bắt đầu và đỉnh 
 kết thúc không nằm trong tập $\{a, d\}$. Tính từ đỉnh $d$, chỉ có một đường khả dĩ là $e$.
 Từ đó ta có tập $\{a, d, e\}$. Tương tự như vậy ta tìm đỉnh tiếp theo với cạnh có trọng số 
 nhỏ nhất với $e$ là đỉnh bắt đầu và đỉnh kết thúc không thuộc tập $\{a, d, e\}$, ta được 
-đỉnh $z$. Đường đi cuối cùng là $a \to d \to e \to z$.
+đỉnh $z$. Đường đi cuối cùng là $a \to d \to e \to z$. \\
 
 Ví dụ trên thể hiện nguyên lý tổng quát của thuật toán Dijkstra đó là đường đi từ đỉnh $a$
 tói đỉnh $z$ có thể được xây dựng bằng cách liệt kê các đường đi và tìm đường có trọng số 
 nhỏ nhất để thêm đỉnh đó vào tập đường đi.
 
 Một cách tổng quát ta có thể trình bày thuật toán Dijkstra với lược đồ sau:
+
+\colorbox{mygrey}{\parbox{16cm}{
+        \begin{minipage}{16cm}
+            \begin{itemize}
+                \item [] Try(i) $\equiv$
+                    \begin{itemize}
+                        \item [] \textbf{for} (v=0..k-1) \textit{//v nhận giá trị từ 0 đến k-1}
+                            \begin{itemize}
+                                \item [] $x_i$ = v ;
+                                \item [] \textbf{if} (i=n) printResult (X) ;
+                                \item [] \textbf{else} Try(i+1) ;
+                            \end{itemize}
+                        \item [] \textbf{endfor};
+                    \end{itemize}
+                \item [] \enskip \textbf{End.} 
+                Lời gọi ban đầu \textbf{Try(1)}
+            \end{itemize}
+        \end{minipage}
+        }
+    }
