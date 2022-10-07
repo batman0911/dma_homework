@@ -1,12 +1,25 @@
 
 \subsection{Bài toán người đưa hàng (TSP)}
+\subsubsection{Thuật toán tìm nghiệm chính xác}
 Trong mục này chúng ta sẽ xem xét bài toán người đưa hàng đã đề cập ở đầu bài.
 Sau khi giải bài toán tìm đường đi ngắn nhất ở mục trước, ta biết rằng bài toán
 người đưa hàng không gì khác ngoài việc tìm được đi ngắn nhất khi ta đặt điểm
-kết thúc chính là điểm bắt đầu. Trước hết ta sẽ đi tìm nghiệm chính xác của bài toán
-với lược đồ sau:
+kết thúc chính là điểm bắt đầu. 
 
-\begin{tcolorbox}[colframe=gray,colback=gray!20,left=10pt,right=10pt,top=10pt,bottom=10pt]
-    \textbf{Travelling salesman problem}
-\end{tcolorbox}
+\href{https://github.com/batman0911/dma_homework/blob/master/hw_02/src/travelling_salesman.ipynb}{python code} 
+    cho bài toán. \\
+
+\textit{Nhận xét: } Như đã nói ở phần trước, thuật toán này không làm giảm độ phức 
+tạp tính toán so với cách vét cạn và là $O (n!)$.
+Độ phức tạp này tăng rất nhanh theo $n$ . Ví dụ khi bắt đầu từ 1 đỉnh, ta có $(n-1)!$
+chu trình Hamilton, tới đỉnh thứ 2 ta còn $(n-2)!$ chu trình Hamilton và tiếp tục như vậy.
+Bởi vì ta có thể đi theo thứ tự ngược lại trong chu trình Hamilton nên số chu trình cần
+sinh ra để có được lời giải là $(n-1)!/2$. Với số đỉnh bằng $25$, số chu trình được sinh 
+ra là $24!/2 \sim 3.1 \times 10^{23}$ - một con số lớn khủng khiếp. Trong thực tế, 
+một đơn vị vận chuyển như \textit{Giao hàng tiết kiệm} giao hàng triệu đơn hàng mỗi ngày 
+tới các địa điểm khác nhau! Do đó ta gần như không thế tìm được lời giải chính xác của bài 
+toán TSP trong thực tế mà cần phải sử dụng các phương pháp xấp xỉ để tìm được một 
+đường đi \textit{đủ tốt}.
+
+\subsubsection{Phương pháp xấp xỉ}
 
