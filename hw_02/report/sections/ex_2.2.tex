@@ -25,7 +25,12 @@ xấp xỉ với thời gian đa thức trên đồ thị thỏa mãn bất đ�
 
 Sử dụng ý tưởng của thuật toán Dijkstra, ta thêm vào tập đỉnh đã đi qua đỉnh lân cận 
 gần nhất cho đến khi toàn bộ tập đỉnh đã được đi qua. Độ phức tạp của thuật toán là $O(n^2)$
-và ta sẽ cùng xem hệ số $c$ với thuật toán này bằng bao nhiêu.
+và ta sẽ cùng xem hệ số $c$ với thuật toán này bằng bao nhiêu. \\
+
+Trước hết, đồ thị $G$ phải thỏa mãn điều kiện bất đẳng thức tam giác 
+$w_{ik} + w_{kj} \geq w_{ij}$, với $w_{st}$ là trọng số của cạnh nối đỉnh $s$ và đỉnh $t$.
+Điều này cũng khá thực tế khi chi phí bay thẳng từ Hà Nội đến Sài Gòn nên nhỏ hơn là phải 
+bay từ Hà Nội vào Đà Nẵng rồi từ Đà Nẵng đi Sài Gòn!
 
 \href{https://github.com/batman0911/dma_homework/blob/master/hw_02/src/travelling_salesman.ipynb}{python code} 
     cho bài toán. \\
