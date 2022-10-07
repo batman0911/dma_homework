@@ -1,16 +1,11 @@
 
 \subsection{Bài toán người đưa hàng (TSP)}
-\subsubsection{Thuật toán tìm nghiệm chính xác}
 Trong mục này chúng ta sẽ xem xét bài toán người đưa hàng đã đề cập ở đầu bài.
 Sau khi giải bài toán tìm đường đi ngắn nhất ở mục trước, ta biết rằng bài toán
 người đưa hàng không gì khác ngoài việc tìm được đi ngắn nhất khi ta đặt điểm
 kết thúc chính là điểm bắt đầu. 
-
-\href{https://github.com/batman0911/dma_homework/blob/master/hw_02/src/travelling_salesman.ipynb}{python code} 
-    cho bài toán. \\
-
-\textit{Nhận xét: } Như đã nói ở phần trước, thuật toán này không làm giảm độ phức 
-tạp tính toán so với cách vét cạn và là $O (n!)$.
+\subsubsection{Thuật toán tìm nghiệm chính xác}
+Độ phức tạp thuật toán vét cạn và là $O (n!)$.
 Độ phức tạp này tăng rất nhanh theo $n$ . Ví dụ khi bắt đầu từ 1 đỉnh, ta có $(n-1)!$
 chu trình Hamilton, tới đỉnh thứ 2 ta còn $(n-2)!$ chu trình Hamilton và tiếp tục như vậy.
 Bởi vì ta có thể đi theo thứ tự ngược lại trong chu trình Hamilton nên số chu trình cần
@@ -22,4 +17,15 @@ toán TSP trong thực tế mà cần phải sử dụng các phương pháp x�
 đường đi \textit{đủ tốt}.
 
 \subsubsection{Phương pháp xấp xỉ}
+Chúng ta sẽ cố gắng đi tìm một cấu hình (chu trình Hamilton) với chi phí không vượt quá
+một \textit{ngưỡng} nhất định. Hay nói cách khác $L(H^*_{G}) \leq L(H_{G}) \leq cL(H^*_{G})$,
+trong đó $L(H_G)$ là hàm chi phí (tổng các trọng số) của một chu trình Hamilton với
+đồ thị $G$ và $H^*_G$ là cấu hình tối ưu của bài toán. Có những thuật toán tìm nghiệm 
+xấp xỉ với thời gian đa thức trên đồ thị thỏa mãn bất đẳng thức tam giác với $c = 3/2$. \\
 
+Sử dụng ý tưởng của thuật toán Dijkstra, ta thêm vào tập đỉnh đã đi qua đỉnh lân cận 
+gần nhất cho đến khi toàn bộ tập đỉnh đã được đi qua. Độ phức tạp của thuật toán là $O(n^2)$
+và ta sẽ cùng xem hệ số $c$ với thuật toán này bằng bao nhiêu.
+
+\href{https://github.com/batman0911/dma_homework/blob/master/hw_02/src/travelling_salesman.ipynb}{python code} 
+    cho bài toán. \\

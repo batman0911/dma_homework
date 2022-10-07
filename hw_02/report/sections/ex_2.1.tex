@@ -53,13 +53,15 @@ Một cách tổng quát ta có thể trình bày thuật toán Dijkstra với l
     \end{itemize}
   \end{tcolorbox}
 
-\textit{Nhận xét: } Thực chất thuật toán Dijkstra vẫn phải duyệt qua toàn bộ cấu 
-hình của bài toán và không làm giảm độ phức tạp so với việc liệt kê toàn bộ đường
-đi và tính giá trị chi phí cho mỗi cấu hình. Tuy nhiên thuật toán Dijkstra đem lại
-sự tường minh mặc dù quét toàn bộ các đỉnh không thuộc tập đã đi qua ($S$) nhưng 
+\textit{Nhận xét: } Thuật toán Dijkstra đem lại
+sự tường minh mà không phải quét qua toàn bộ cấu hình của bài toán, 
 ta chỉ cập nhật đỉnh gần với đỉnh cuối cùng nhất, điều đó làm giảm không gian lưu 
 trữ so với cách vét cạn (khi ta phải lưu toàn bộ đường đi và chi phí của mọi đường
-đi khả dĩ từ đỉnh $a$ tới đỉnh $z$). \\
+đi khả dĩ từ đỉnh $a$ tới đỉnh $z$). Độ phức tạp của thuật toán là $O(n^2)$. 
+Ta có thể dễ dàng thu được vì ban đầu khi chọn 1 đỉnh, ta cần $(n-1)$ phép so sánh
+để tìm được đỉnh gần nhất đầu tiên, tiếp theo ta cần $(n-2)$ phép tính để tìm đỉnh 
+gần nhất thứ 2, tiếp tục như vậy cho đến khi thu được đỉnh đích. Số phép tính là tổng 
+từ $1$ đến $(n-1)$. \\
 
 Trong thực tế lập trình, chúng ta không nhất thiết phải lưu giá trị cạnh bằng một 
 số lớn (vô cùng) mà có thể đánh bằng $0$ và kiểm tra thêm một điều kiện trong vòng 
