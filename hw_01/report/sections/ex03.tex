@@ -32,7 +32,7 @@ Gọi $\Sigma$ là tập các kí tự và "-" là kí tự đặc biệt kí hi
 Sự tương tự của các cặp kí tự trong 2 chuỗi có thể được biểu diễn thông qua 
 một ma trận $\delta$ mà $\delta(x,y)$ là điểm của cặp $x$ và $y$ với 
 $x, y \in \Sigma \cup \{-\}$. \\
-Bài toán dóng hàng toàn cục có thể mô hình hóa bằng cách tìm một các dóng hàng A
+Bài toán dóng hàng toàn cục có thể mô hình hóa bằng cách tìm một cách dóng hàng A
 nào đó để cực đại $\sum_{\{x, y \} \in A} \delta(x,y)$. Cách dóng hàng này được
 gọi là cách tối ưu (\textit{optimal alignment}). \\
 Khi một cặp kí tự được sắp xếp và giống nhau, liên hệ giữa chúng
@@ -42,7 +42,7 @@ là \textit{insert}, khi được thêm vào chuỗi thứ 2 thì được gọi
 Trong ví dụ trên chúng ta có 5 \textit{matches}, 6 \textit{mismatchs}, 3 \textit{inserts}
 và 2 \textit{deletes}.
 
-Chúng ta cùng xem xét mooyj ví dụ về dóng hàng toàn cục. Xét ma trận điểm cho tập 
+Chúng ta cùng xem xét một ví dụ về dóng hàng toàn cục. Xét ma trận điểm cho tập 
 $\{-, A, C, G, T\}$ với $\delta(x, y) = 2, -1, -1, -1$ lần lượt cho match, mismatch, 
 delete và insert. Xét 2 chuỗi DNA $S = ACAATCC$ và $T = AGCATGC$, một cách dóng hàng
 khả dĩ như sau:
@@ -50,7 +50,7 @@ khả dĩ như sau:
     \lstinline{S = A-CAATCC} \\
     \lstinline{T = AGCA-TGC}
 \end{center}
-Cách dóng hàng trên có 5 matches, 1 mismatches, 1 insert và 1 delete. Vậy điểm tương tự của 
+Cách dóng hàng trên có 5 matches, 1 mismatch, 1 insert và 1 delete. Vậy điểm tương tự của 
 cách dòng hàng này là 7. Có thể kiểm tra được đây là điểm cực đại thế nên cách dóng hàng
 này là một cách tối ưu. Cần chú ý là có thể có nhiều hơn một cách dóng hàng tối ưu. 
 Ví dụ 1 cách khác cũng trả về điểm tương tự cực đại.
@@ -67,7 +67,7 @@ Ví dụ 1 cách khác cũng trả về điểm tương tự cực đại.
 
 \subsection{Giải thuật Needleman-Wunsch}
 \subsubsection{Giải thuật}
-Xét 2 chuỗi kí tự $S[1...n]$ và $T[1...m]$. Để tìm các dóng hàng toàn cục tối ưu cho 
+Xét 2 chuỗi kí tự $S[1...n]$ và $T[1...m]$. Để tìm cách dóng hàng toàn cục tối ưu cho 
 bài toán này chúng ta có thể nghĩ tới giải thuật vét cạn bằng cách sinh ra mọi cách 
 dóng hàng và tìm xem cách nào có điểm cao nhất. Tuy nhiên cách tiếp cận này có thời
 gian tính toán theo hàm mũ. Trong phần này, chúng ta sẽ xem xét một giải thuật hiệu quả
@@ -127,3 +127,8 @@ Tương ứng ta thu được cách dóng hàng tối ưu:
 \end{center}
 
 \subsubsection{Thời gian tính toán}
+Như đã trình bày trong phần trước, thuật toán Needleman-Wunsch có thời gian tính toán là $O(nm)$
+khi giải bài toán dóng hàng toàn cục do chúng ta cần điền vào toàn bộ các ô trong bảng điểm 
+dòng hàng có kích thước $n \times m$
+
+\input{sections/ex03_code.tex}  
