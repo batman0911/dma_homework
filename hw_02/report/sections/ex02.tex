@@ -46,22 +46,46 @@ nhỏ nhất để thêm đỉnh đó vào tập đường đi.
 
 Một cách tổng quát ta có thể trình bày thuật toán Dijkstra với lược đồ sau:
 
-\colorbox{mygrey}{\parbox{16cm}{
-        \begin{minipage}{16cm}
-            \begin{itemize}
-                \item [] Try(i) $\equiv$
-                    \begin{itemize}
-                        \item [] \textbf{for} (v=0..k-1) \textit{//v nhận giá trị từ 0 đến k-1}
-                            \begin{itemize}
-                                \item [] $x_i$ = v ;
-                                \item [] \textbf{if} (i=n) printResult (X) ;
-                                \item [] \textbf{else} Try(i+1) ;
-                            \end{itemize}
-                        \item [] \textbf{endfor};
-                    \end{itemize}
-                \item [] \enskip \textbf{End.} 
-                Lời gọi ban đầu \textbf{Try(1)}
-            \end{itemize}
-        \end{minipage}
-        }
-    }
+\begin{tcolorbox}[colframe=gray,colback=gray!20,left=10pt,right=10pt,top=10pt,bottom=10pt]
+    \textbf{Thuật toán Dijkstra} \\
+    $G$ là một đơn đồ thị đầy đủ kết nối với trọng số mỗi cạnh dương \\
+    $G$ có các đỉnh $a = v_0, v_1, ..., v_n = z$, trọng số 
+    $w(v_i, v_j)$ với $w(v_i, v_j) = \infty$ nếu $\{v_i, v_j\}$ không thuộc 
+    tập cạnh của $G$
+
+    \begin{itemize}
+        \item [] for i = 1 to n 
+        \begin{itemize}
+            \item [] $L(v_i) = \infty$
+        \end{itemize} 
+        \item [] $L(a) = 0$
+        \item [] $S = \emptyset $ (Khởi tạo các nhãn với nhãn của $a$ là $0$, 
+        các nhãn khác bằng $\infty$ và tập $S$ rỗng)
+        \item [] while $z \notin S$
+        \begin{itemize}
+          \item [] $u = a$ đỉnh không thuộc $S$ với $L(u)$ nhỏ nhất
+          \item [] $S = S \cup \{u\}$
+          \item [] for $v \notin S$
+          \begin{itemize}
+            \item [] if $L(u) + w(u,v) < L(v)$ then $L(v) = L(u) + w(u,v)$
+            (Bước này thêm đỉnh gần nhất vào tập $S$ và cập nhật lại hàm chi phí)
+          \end{itemize}
+        \end{itemize}
+        return $L(z)$ ($L(z)$ là độ dài của đường đi ngắn nhất từ $a$ tới $z$)
+    \end{itemize}
+  \end{tcolorbox}
+
+\textit{Nhận xét: } Thực chất thuật toán Dijkstra vẫn phải duyệt qua toàn bộ cấu 
+hình của bài toán và không làm giảm độ phức tạp so với việc liệt kê toàn bộ đường
+đi và tính giá trị chi phí cho mỗi cấu hình. Tuy nhiên thuật toán Dijkstra đem lại
+sự tường minh mặc dù quét toàn bộ các đỉnh không thuộc tập đã đi qua ($S$) nhưng 
+ta chỉ cập nhật đỉnh gần với đỉnh cuối cùng nhất, điều đó làm giảm không gian lưu 
+trữ so với cách vét cạn (khi ta phải lưu toàn bộ đường đi và chi phí của mọi đường
+đi khả dĩ từ đỉnh $a$ tới đỉnh $z$). \\
+
+Trong thực tế lập trình, chúng ta không nhất thiết phải lưu giá trị cạnh bằng một 
+số lớn (vô cùng) mà có thể đánh bằng $0$ và kiểm tra thêm một điều kiện trong vòng 
+lặp để tránh sự cồng kềnh của ma trận kề. \\
+
+\href{https://github.com/batman0911/dma_homework/blob/master/hw_01/src/dynamic_programming.ipynb}{python code} 
+    cho bài toán
